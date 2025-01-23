@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { STATIC_PROPS_ID, SERVER_PROPS_ID } from 'next/constants';
-import { NativeDataFetcher, debug } from '@sitecore-jss/sitecore-jss';
+import { debug } from '@sitecore-jss/sitecore-jss';
+import { NativeDataFetcher } from './native-fetcher';
 import { EditMode, LayoutServicePageState } from '@sitecore-jss/sitecore-jss/layout';
 import {
   QUERY_PARAM_EDITING_SECRET,
@@ -67,7 +68,7 @@ export type EditingRenderMiddlewareConfig = {
    * Function used to determine the root server URL. This is used for the route/page and subsequent data API requests.
    * By default, the host header is used, with https protocol on Vercel (due to serverless function architecture) and http protocol elsewhere.
    * @param {NextApiRequest} req The current request.
-   * @default `${process.env.VERCEL ? 'https' : 'http'}://${req.headers.host}`;
+   * @default
    * @see resolvePageUrl
    */
   resolveServerUrl?: (req: NextApiRequest) => string;
@@ -94,11 +95,7 @@ export class ChromesHandler extends RenderMiddlewareBase {
     this.editingDataService = config?.editingDataService ?? editingDataService;
     this.dataFetcher =
       config?.dataFetcher ??
-      new NativeDataFetcher({
-        debugger: debug.editing,
-        credentials: 'include',
-        headers: { Accept: '*/*' },
-      });
+      new NativeDataFetcher({ debugger: debug.editing, credentials: 'include' });
     this.resolvePageUrl = config?.resolvePageUrl ?? this.defaultResolvePageUrl;
     this.resolveServerUrl = config?.resolveServerUrl ?? this.defaultResolveServerUrl;
   }
