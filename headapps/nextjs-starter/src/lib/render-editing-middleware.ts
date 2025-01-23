@@ -94,7 +94,11 @@ export class ChromesHandler extends RenderMiddlewareBase {
     this.editingDataService = config?.editingDataService ?? editingDataService;
     this.dataFetcher =
       config?.dataFetcher ??
-      new NativeDataFetcher({ debugger: debug.editing, credentials: 'include' });
+      new NativeDataFetcher({
+        debugger: debug.editing,
+        credentials: 'include',
+        headers: { Accept: '*/*' },
+      });
     this.resolvePageUrl = config?.resolvePageUrl ?? this.defaultResolvePageUrl;
     this.resolveServerUrl = config?.resolveServerUrl ?? this.defaultResolveServerUrl;
   }
