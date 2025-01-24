@@ -25,6 +25,7 @@ const getJssEditingSecret = (): string => {
   }
   return secret;
 };
+
 /**
  * Configuration for the Editing Render Middleware.
  */
@@ -68,7 +69,7 @@ export type EditingRenderMiddlewareConfig = {
    * Function used to determine the root server URL. This is used for the route/page and subsequent data API requests.
    * By default, the host header is used, with https protocol on Vercel (due to serverless function architecture) and http protocol elsewhere.
    * @param {NextApiRequest} req The current request.
-   * @default
+   * @default `${process.env.VERCEL ? 'https' : 'http'}://${req.headers.host}`;
    * @see resolvePageUrl
    */
   resolveServerUrl?: (req: NextApiRequest) => string;
@@ -87,17 +88,13 @@ export class ChromesHandler extends RenderMiddlewareBase {
   private editingDataService: EditingDataService;
   private dataFetcher: NativeDataFetcher;
   private resolvePageUrl: (args: { serverUrl: string; itemPath: string }) => string;
-  private resolveServerUrl: (req: NextApiRequest) => string;
+  private resolveServerUrl: (req: NextApiRequest, secure?: boolean) => string;
 
   constructor(public config?: EditingRenderMiddlewareChromesConfig) {
     super();
 
     this.editingDataService = config?.editingDataService ?? editingDataService;
-    this.dataFetcher =
-      config?.dataFetcher ??
-      new NativeDataFetcher({
-        debugger: debug.editing,
-      });
+    this.dataFetcher = config?.dataFetcher ?? new NativeDataFetcher({ debugger: debug.editing });
     this.resolvePageUrl = config?.resolvePageUrl ?? this.defaultResolvePageUrl;
     this.resolveServerUrl = config?.resolveServerUrl ?? this.defaultResolveServerUrl;
   }
@@ -110,9 +107,10 @@ export class ChromesHandler extends RenderMiddlewareBase {
     try {
       // Extract data from EE payload
       const editingData = this.extractEditingData(req);
-
+      // use https for requests with auth but also support unsecured http rendering hosts
+      const secure = req.headers.authorization ? true : false;
       // Resolve server URL
-      const serverUrl = this.resolveServerUrl(req);
+      const serverUrl = this.resolveServerUrl(req, secure);
 
       // Get query string parameters to propagate on subsequent requests (e.g. for deployment protection bypass)
       const params = this.getQueryParamsForPropagation(query);
@@ -230,8 +228,8 @@ export class ChromesHandler extends RenderMiddlewareBase {
    * https://vercel.com/docs/environment-variables#system-environment-variables
    * @param {NextApiRequest} req
    */
-  private defaultResolveServerUrl = (req: NextApiRequest) => {
-    return `https://${req.headers.host}`;
+  private defaultResolveServerUrl = (req: NextApiRequest, secure?: boolean) => {
+    return `${secure ? 'https' : 'http'}://${req.headers.host}`;
   };
 
   private extractEditingData(req: NextApiRequest): EditingData {
