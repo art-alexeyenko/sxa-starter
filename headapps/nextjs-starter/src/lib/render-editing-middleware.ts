@@ -97,11 +97,6 @@ export class ChromesHandler extends RenderMiddlewareBase {
       config?.dataFetcher ??
       new NativeDataFetcher({
         debugger: debug.editing,
-        credentials: 'include',
-        headers: {
-          Accept: 'application/json, text/plain, */*',
-          withCredentials: 'true',
-        },
       });
     this.resolvePageUrl = config?.resolvePageUrl ?? this.defaultResolvePageUrl;
     this.resolveServerUrl = config?.resolveServerUrl ?? this.defaultResolveServerUrl;
@@ -236,7 +231,7 @@ export class ChromesHandler extends RenderMiddlewareBase {
    * @param {NextApiRequest} req
    */
   private defaultResolveServerUrl = (req: NextApiRequest) => {
-    return `${process.env.VERCEL ? 'https' : 'http'}://${req.headers.host}`;
+    return `https://${req.headers.host}`;
   };
 
   private extractEditingData(req: NextApiRequest): EditingData {
