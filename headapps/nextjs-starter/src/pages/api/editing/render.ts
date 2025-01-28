@@ -1,5 +1,5 @@
 import { EditingRenderMiddleware } from '@sitecore-jss/sitecore-jss-nextjs/editing';
-
+import { redisDataService } from 'lib/redis-editing-service';
 /**
  * This Next.js API route is used to handle GET and POST requests from Sitecore editors.
  * GET requests are used with Metadata editing mode while POST ones are used with Chromes(legacy) mode.
@@ -41,6 +41,8 @@ export const config = {
 };
 
 // Wire up the EditingRenderMiddleware handler
-const handler = new EditingRenderMiddleware().getHandler();
+const handler = new EditingRenderMiddleware({
+  editingDataService: redisDataService,
+}).getHandler();
 
 export default handler;

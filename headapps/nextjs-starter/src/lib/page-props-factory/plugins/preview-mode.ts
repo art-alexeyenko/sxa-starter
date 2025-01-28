@@ -4,13 +4,11 @@ import {
   personalizeLayout,
   getGroomedVariantIds,
 } from '@sitecore-jss/sitecore-jss-nextjs';
-import {
-  editingDataService,
-  isEditingMetadataPreviewData,
-} from '@sitecore-jss/sitecore-jss-nextjs/editing';
+import { isEditingMetadataPreviewData } from '@sitecore-jss/sitecore-jss-nextjs/editing';
 import { SitecorePageProps } from 'lib/page-props';
 import { graphQLEditingService } from 'lib/graphql-editing-service';
 import { Plugin } from '..';
+import { redisDataService as editingDataService } from 'lib/redis-editing-service';
 
 class PreviewModePlugin implements Plugin {
   order = 1;
