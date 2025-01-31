@@ -1,0 +1,68 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**",
+        ".next/**"
+      ],
+      "env": [
+        "AWS_LAMBDA_JS_TTL",
+        "NODE_ENV",
+        "EXPORT_MODE",
+        "DISABLE_SSG_FETCH",
+        "NEXT_PUBLIC_BUILD_ID",
+        "NEXT_PUBLIC_COMMIT_REF",
+        "DEBUG_MULTILINE",
+        "FETCH_WITH",
+        "JSS_APP_NAME",
+        "GRAPH_QL_ENDPOINT",
+        "GRAPH_QL_SERVICE_RETRIES",
+        "NEXT_PUBLIC_CDP_CLIENT_KEY",
+        "NEXT_PUBLIC_CDP_TARGET_URL",
+        "NEXT_PUBLIC_CDP_ENABLED",
+        "NEXT_PUBLIC_PERSONALIZE_SCOPE",
+        "PERSONALIZE_MIDDLEWARE_EDGE_TIMEOUT",
+        "PERSONALIZE_MIDDLEWARE_CDP_TIMEOUT",
+        "EDGE_MEDIA_URL",
+        "SITECORE_API_HOST",
+        "SITECORE_API_KEY",
+        "SITECORE_CONTEXT_ID",
+        "SITECORE_EDGE_URL",
+        "SITECORE_SITE_NAME",
+        "SITECORE_EDGE_CONTEXT_ID",
+        "NEXT_PUBLIC_IMAGE_QUALITY",
+        "NEXT_PUBLIC_SEARCH_ENV",
+        "NEXT_PUBLIC_SEARCH_CUSTOMER_KEY",
+        "NEXT_PUBLIC_SEARCH_API_KEY",
+        "NEXT_PUBLIC_SEARCH_API_URL",
+        "NEXT_PUBLIC_SEARCH_API_DOMAIN_ID",
+        "NEXT_PUBLIC_ISR",
+        "NEXT_REVALIDATION_TOKEN",
+        "NEXT_PUBLIC_GTM_ID",
+        "NEXT_PUBLIC_GTM_PLATFORM_NAME",
+        "ENABLE_PERSONALIZATION",
+        "JSS_EDITING_SECRET",
+        "SITE_ID",
+        "API_TOKEN",
+        "QUOTE_COMPARISON_ENDPOINT",
+        "URL_PREVENTIVATORE",
+        "DEFAULT_LANGUAGE",
+        "PRODUCT_FOLDER_ID",
+        "PRODUCT_TEMPLATE_ID",
+        "BANK_HEADER_CTA_LINK",
+        "NEXT_PUBLIC_GOOGLE_MAPS_API_KEY"
+      ]
+    },
+    "lint": {
+      "outputs": []
+    },
+    "dev": {
+      "cache": false
+    },
+    "test": {}
+  }
+}
