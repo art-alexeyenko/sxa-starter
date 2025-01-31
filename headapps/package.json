@@ -12,7 +12,8 @@
     "pnpm": ">=9.11.0"
   },
   "scripts": {
-    "install-build": "pnpm install & turbo run build --filter nextjs-starter",
+    "install-build": "pnpm install && pnpm build:next",
+    "build:next": "turbo run build --filter nextjs-starter",
     "start": "turbo run start:production --filter nextjs-starter"
   },
   "devDependencies": {
