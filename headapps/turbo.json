@@ -60,6 +60,11 @@
     "lint": {
       "outputs": []
     },
+    "start:production": {
+      "dependsOn": [
+        "^build"
+      ]
+    },
     "dev": {
       "cache": false
     },
