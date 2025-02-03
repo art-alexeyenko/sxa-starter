@@ -14,7 +14,7 @@
   "scripts": {
     "install-build": "pnpm install && pnpm build:next",
     "build:next": "turbo run build --filter nextjs-starter",
-    "start": "turbo run start:production --filter nextjs-starter"
+    "start": "pnpm -F=nextjs-starter start:production "
   },
   "devDependencies": {
     "ts-node": "^10.0.0",
