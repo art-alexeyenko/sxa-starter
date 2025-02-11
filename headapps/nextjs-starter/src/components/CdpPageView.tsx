@@ -2,7 +2,7 @@ import {
   CdpHelper,
   LayoutServicePageState,
   useSitecoreContext,
-} from '@sitecore-jss/sitecore-jss-nextjs';
+} from '@sitecore-content-sdk/nextjs';
 import { useEffect } from 'react';
 import { pageView } from '@sitecore-cloudsdk/events/browser';
 import config from 'temp/config';
