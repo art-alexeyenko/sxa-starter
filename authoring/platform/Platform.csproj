@@ -72,6 +72,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Config\Include\" />
+    <Content Include="App_Config\Include\patch.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
