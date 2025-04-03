@@ -11,20 +11,20 @@
   },
   "author": {
     "name": "Sitecore Corporation",
-    "url": "https://jss.sitecore.com"
+    "url": "https://doc.sitecore.com/xmc/en/developers/content-sdk/index.html"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sitecore/jss.git"
+    "url": "git+https://github.com/sitecore/content-sdk.git"
   },
   "bugs": {
-    "url": "https://github.com/sitecore/jss/issues"
+    "url": "https://github.com/sitecore/content-sdk/issues"
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@sitecore-cloudsdk/core": "^0.4.2",
-    "@sitecore-cloudsdk/events": "^0.4.2",
-    "@sitecore-content-sdk/nextjs": "0.1.0-beta.28",
+    "@sitecore-cloudsdk/core": "^0.5.0",
+    "@sitecore-cloudsdk/events": "^0.5.0",
+    "@sitecore-content-sdk/nextjs": "0.2.0-beta.2",
     "@sitecore/components": "~2.0.1",
     "@sitecore-feaas/clientside": "^0.5.19",
     "bootstrap": "^5.3.3",
@@ -38,7 +38,7 @@
     "sharp": "0.33.5"
   },
   "devDependencies": {
-    "@sitecore-content-sdk/cli": "0.1.0-beta.28",
+    "@sitecore-content-sdk/cli": "0.2.0-beta.2",
     "@types/node": "^22.9.0",
     "@types/react": "^18.2.22",
     "@types/react-dom": "^18.0.5",
@@ -63,8 +63,7 @@
     "typescript": "~5.4.0"
   },
   "scripts": {
-    "bootstrap": "ts-node --require dotenv-flow/config --project tsconfig.scripts.json scripts/bootstrap.ts",
-    "build": "cross-env NODE_ENV=production npm-run-all --serial bootstrap sitecore-tools:build next:build",
+    "build": "cross-env NODE_ENV=production npm-run-all --serial sitecore-tools:build next:build",
     "graphql:update": "ts-node --project tsconfig.scripts.json ./scripts/fetch-graphql-introspection-data.ts",
     "install-pre-push-hook": "ts-node --project tsconfig.scripts.json ./scripts/install-pre-push-hook.ts",
     "lint": "eslint ./src/**/*.tsx ./src/**/*.ts ./scripts/**/*.ts",
@@ -72,8 +71,7 @@
     "next:dev": "cross-env NODE_OPTIONS='--inspect' next dev",
     "next:start": "next start",
     "sitecore-tools:build": "sitecore-tools build",
-    "start:connected": "cross-env NODE_ENV=development npm-run-all --serial bootstrap sitecore-tools:build --parallel next:dev start:watch-components",
-    "start:production": "cross-env-shell NODE_ENV=production npm-run-all --serial bootstrap sitecore-tools:build next:build next:start",
-    "start:watch-components": "ts-node --project tsconfig.scripts.json scripts/generate-component-builder/index.ts --watch"
+    "start:connected": "cross-env NODE_ENV=development npm-run-all --serial sitecore-tools:build next:dev",
+    "start:production": "cross-env-shell NODE_ENV=production npm-run-all --serial build next:start"
   }
 }
