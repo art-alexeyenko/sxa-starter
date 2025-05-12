@@ -19,6 +19,11 @@ module.exports = function generateConfig(configOverrides) {
     sitecoreApiHost: '',
     sitecoreSiteName: process.env.VUE_APP_SITECORE_SITE_NAME,
     layoutServiceConfigurationName: 'default',
+    sitecoreEdgeContextId: process.env.VUE_APP_SITECORE_EDGE_CONTEXT_ID,
+    sitecoreEdgeUrl: process.env.VUE_APP_SITECORE_EDGE_URL,
+    graphQLEndpoint: process.env.VUE_APP_GRAPHQL_ENDPOINT,
+    sitecoreApiKey: process.env.VUE_APP_SITECORE_API_KEY,
+    proxyHost: process.env.PROXY_HOST,
   };
 
   // require + combine config sources

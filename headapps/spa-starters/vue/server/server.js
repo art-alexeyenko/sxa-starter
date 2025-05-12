@@ -172,3 +172,29 @@ function initializei18n(state) {
 
   return i18ninit(state.sitecore.context.language, state.viewBag.dictionary);
 }
+
+// server exports
+import { clientFactory, getGraphQLClientFactoryConfig } from '../src/lib/client-factory';
+import { dictionaryServiceFactory } from '../src/lib/dictionary-service-factory';
+import { layoutServiceFactory } from '../src/lib/layout-service-factory';
+import scConfig from '../src/temp/config';
+import { components } from '../src/temp/componentFactory';
+/**
+ * Define the required configuration values to be exported from the server.bundle.ts.
+ */
+
+const defaultLanguage = scConfig.defaultLanguage;
+const sitecoreSiteName = scConfig.sitecoreSiteName;
+const personalizeScope = scConfig.personalizeScope;
+const getClientFactoryConfig = getGraphQLClientFactoryConfig;
+
+export {
+  clientFactory,
+  getClientFactoryConfig,
+  dictionaryServiceFactory,
+  layoutServiceFactory,
+  defaultLanguage,
+  sitecoreSiteName,
+  personalizeScope,
+  components,
+};

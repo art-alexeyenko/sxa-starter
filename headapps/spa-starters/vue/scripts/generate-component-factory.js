@@ -106,7 +106,7 @@ function generateComponentFactory() {
 // See scripts/bootstrap.js to modify the generation of this file.
 ${imports.join('\n')}
 
-const components = new Map();
+export const components = new Map();
 ${registrations.join('\n')}
 
 export default function componentFactory(componentName) {
