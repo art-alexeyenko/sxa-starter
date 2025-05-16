@@ -7,7 +7,7 @@ import {
   Text,
   useSitecoreContext,
 } from '@sitecore-content-sdk/nextjs';
-import React, { CSSProperties, JSX } from 'react';
+import React, { CSSProperties } from 'react';
 
 interface Fields {
   Image: ImageField & { metadata?: { [key: string]: unknown } };

@@ -1,4 +1,4 @@
-import { useEffect, JSX } from 'react';
+import { useEffect } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import NotFound from 'src/NotFound';
 import Layout from 'src/Layout';
@@ -48,7 +48,10 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
   let paths: StaticPath[] = [];
   let fallback: boolean | 'blocking' = 'blocking';
 
-  if (process.env.NODE_ENV !== 'development' && !scConfig.disableStaticPaths) {
+  if (
+    process.env.NODE_ENV !== 'development' &&
+    process.env.DISABLE_SSG_FETCH?.toLowerCase() !== 'true'
+  ) {
     try {
       paths = await client.getPagePaths(context?.locales || []);
     } catch (error) {

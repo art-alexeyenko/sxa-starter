@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import * as FEAAS from '@sitecore-feaas/clientside/react';
 import nextConfig from 'next.config';
-import { JSX } from 'react';
 // Element implementations for Sitecore Component Builder can be overriden here
 
 const FEAASScripts = (): JSX.Element => {

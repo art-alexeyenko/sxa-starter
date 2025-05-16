@@ -1,4 +1,4 @@
-import { useEffect, JSX } from 'react';
+import { useEffect } from 'react';
 import { CloudSDK } from '@sitecore-cloudsdk/core/browser';
 import '@sitecore-cloudsdk/events/browser';
 import config from 'sitecore.config';

@@ -7,6 +7,7 @@ import {
 } from '@sitecore-content-sdk/nextjs/middleware';
 import sites from '.sitecore/sites.json';
 import scConfig from 'sitecore.config';
+import { createGraphQLClientFactory } from '@sitecore-content-sdk/nextjs/client';
 
 const multisite = new MultisiteMiddleware({
   /**
@@ -20,7 +21,10 @@ const multisite = new MultisiteMiddleware({
   // This is an important performance consideration since Next.js Edge middleware runs on every request.
   skip: () => false,
 });
+const clientFactory = createGraphQLClientFactory({ api: scConfig.api });
 const redirects = new RedirectsMiddleware({
+  // Client factory implementation
+  clientFactory,
   /**
    * List of sites for site resolver to work with
    */
@@ -35,6 +39,8 @@ const redirects = new RedirectsMiddleware({
 });
 
 const personalize = new PersonalizeMiddleware({
+  // Client factory implementation
+  clientFactory,
   /**
    * List of sites for site resolver to work with
    */
