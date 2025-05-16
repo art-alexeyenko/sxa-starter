@@ -22,6 +22,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
+    "@next/bundle-analyzer": "^15.3.2",
     "@sitecore-cloudsdk/core": "^0.5.1",
     "@sitecore-cloudsdk/events": "^0.5.1",
     "@sitecore-content-sdk/nextjs": "0.3.0-canary.4",
