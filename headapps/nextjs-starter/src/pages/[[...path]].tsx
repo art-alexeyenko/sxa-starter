@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, JSX } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import NotFound from 'src/NotFound';
 import Layout from 'src/Layout';
 import {
-  SitecoreContext,
+  SitecoreProvider,
   ComponentPropsContext,
   SitecorePageProps,
   StaticPath,
@@ -27,9 +27,9 @@ const SitecorePage = ({ notFound, componentProps, layout }: SitecorePageProps): 
 
   return (
     <ComponentPropsContext value={componentProps || {}}>
-      <SitecoreContext componentMap={components} layoutData={layout} api={scConfig.api}>
+      <SitecoreProvider componentMap={components} layoutData={layout} api={scConfig.api}>
         <Layout layoutData={layout} />
-      </SitecoreContext>
+      </SitecoreProvider>
     </ComponentPropsContext>
   );
 };
@@ -48,10 +48,7 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
   let paths: StaticPath[] = [];
   let fallback: boolean | 'blocking' = 'blocking';
 
-  if (
-    process.env.NODE_ENV !== 'development' &&
-    process.env.DISABLE_SSG_FETCH?.toLowerCase() !== 'true'
-  ) {
+  if (process.env.NODE_ENV !== 'development' && !scConfig.disableStaticPaths) {
     try {
       paths = await client.getPagePaths(context?.locales || []);
     } catch (error) {

@@ -1,11 +1,8 @@
-import {
-  CdpHelper,
-  LayoutServicePageState,
-  useSitecoreContext,
-} from '@sitecore-content-sdk/nextjs';
+import { CdpHelper, LayoutServicePageState, useSitecore } from '@sitecore-content-sdk/nextjs';
 import { useEffect } from 'react';
 import { pageView } from '@sitecore-cloudsdk/events/browser';
 import config from 'sitecore.config';
+import { JSX } from 'react';
 
 /**
  * This is the CDP page view component.
@@ -15,8 +12,8 @@ import config from 'sitecore.config';
  */
 const CdpPageView = (): JSX.Element => {
   const {
-    sitecoreContext: { pageState, route, variantId, site },
-  } = useSitecoreContext();
+    pageContext: { pageState, route, variantId, site },
+  } = useSitecore();
 
   /**
    * Determines if the page view events should be turned off.
