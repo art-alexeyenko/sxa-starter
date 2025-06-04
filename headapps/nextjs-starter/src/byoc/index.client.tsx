@@ -1,4 +1,5 @@
 import * as FEAAS from '@sitecore-feaas/clientside/react';
+import '@sitecore/components/form';
 /**
  * You can import your own client components here
  * @example
