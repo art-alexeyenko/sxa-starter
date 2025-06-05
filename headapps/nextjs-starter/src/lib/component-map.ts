@@ -18,12 +18,14 @@ import * as RichText from 'src/components/RichText';
 import * as RowSplitter from 'src/components/RowSplitter';
 import * as SitecoreStyles from 'src/components/SitecoreStyles';
 import * as Title from 'src/components/Title';
+import * as CountryAndLang from 'src/components/CountryAndLang';
 
 // Components must be registered with to match the string key with component name in Sitecore
 export const componentMap = new Map<string, NextjsJssComponent>([
   ['BYOCWrapper', BYOCWrapper],
   ['FEaaSWrapper', FEaaSWrapper],
   ['CdpPageView', CdpPageView],
+  ['CountryAndLang', CountryAndLang],
   ['ColumnSplitter', ColumnSplitter],
   ['Container', Container],
   ['ContentBlock', ContentBlock],
