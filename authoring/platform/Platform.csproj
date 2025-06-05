@@ -71,6 +71,7 @@
     <None Include="web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Config\Include\Patch.config" />
     <Folder Include="App_Config\Include\" />
   </ItemGroup>
   <PropertyGroup>
