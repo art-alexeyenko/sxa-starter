@@ -1,8 +1,7 @@
-import { JSX } from 'react';
+import React, { JSX } from 'react';
+import { Field, Text } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
-import { Field, withDatasourceCheck } from '@sitecore-content-sdk/nextjs';
-
-type CountryAndLangSlideItem = {
+type CountryAndLanguageSlideItem = {
   TestCountry: {
     value: Field<string>;
   };
@@ -10,43 +9,62 @@ type CountryAndLangSlideItem = {
     value: Field<string>;
   };
 };
-
 interface Fields {
   data: {
     datasource: {
       id: string;
       name: string;
       children: {
-        results: CountryAndLangSlideItem[];
+        results: CountryAndLanguageSlideItem[];
       };
     };
   };
 }
-
-type ComponentAndLangProps = ComponentProps & {
+type CountryAndLanguageProps = ComponentProps & {
   params: { [key: string]: string };
   fields: Fields;
 };
-
-const CountryAndLang = (props: ComponentAndLangProps): JSX.Element => {
-  // Query results in integrated GraphQL replace the normal `fields` data
-  // i.e. with { data, }
-  const { datasource } = props.fields.data;
-
-  return (
-    <div>
-      {datasource && (
-        <div>
-          <h4>Datasource Item (via Integrated GraphQL)</h4>
-          id: {datasource.id}
-          <br />
-          name: {datasource.name}
-          <br />
-          children: {datasource.children.results.toString()}
-        </div>
-      )}
-    </div>
-  );
+type CountryAndLanguageSlideProps = {
+  slides: CountryAndLanguageSlideItem[];
 };
-
-export default withDatasourceCheck()<ComponentAndLangProps>(CountryAndLang);
+const CountryAndLanguageSlidesContent = (props: CountryAndLanguageSlideProps): JSX.Element => {
+  if (props.slides && props.slides.length > 0) {
+    return (
+      <div>
+        {props.slides.map((slide: CountryAndLanguageSlideItem, index: number) => (
+          <div key={index}>
+            <h1 className="component-content title row">
+              <Text field={slide.TestCountry.value} />
+            </h1>
+            <div className="component-content text row">
+              <Text field={slide.TestLanguage.value} />
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  return <></>;
+};
+export const Default = (props: CountryAndLanguageProps): JSX.Element => {
+  const containerStyles = props.params && props.params.styles ? props.params.styles : '';
+  const styles = `${props.params.GridParameters} ${containerStyles}`.trimEnd();
+  if (props.fields?.data?.datasource) {
+    return (
+      <div className={`container-default component ${styles}`}>
+        <div data-class-change className={containerStyles}>
+          This container contains a datasource item.
+        </div>
+        <CountryAndLanguageSlidesContent slides={props.fields.data.datasource.children.results} />
+      </div>
+    );
+  } else {
+    return (
+      <div className={`container-default component ${styles}`}>
+        <div data-class-change className={containerStyles}>
+          This container does not contain a datasource item.
+        </div>
+      </div>
+    );
+  }
+};
