@@ -28,6 +28,7 @@ type CountryAndLanguageSlideProps = {
   slides: CountryAndLanguageSlideItem[];
 };
 const CountryAndLanguageSlidesContent = (props: CountryAndLanguageSlideProps): JSX.Element => {
+  console.log('CountryAndLanguageSlidesContent', JSON.stringify(props.slides));
   if (props.slides && props.slides.length > 0) {
     return (
       <div>
@@ -47,23 +48,17 @@ const CountryAndLanguageSlidesContent = (props: CountryAndLanguageSlideProps): J
   return <></>;
 };
 export const Default = (props: CountryAndLanguageProps): JSX.Element => {
-  const containerStyles = props.params && props.params.styles ? props.params.styles : '';
-  const styles = `${props.params.GridParameters} ${containerStyles}`.trimEnd();
   if (props.fields?.data?.datasource) {
     return (
-      <div className={`container-default component ${styles}`}>
-        <div data-class-change className={containerStyles}>
-          This container contains a datasource item.
-        </div>
+      <div className={`container-default component `}>
+        <div data-class-change>This container contains a datasource item.</div>
         <CountryAndLanguageSlidesContent slides={props.fields.data.datasource.children.results} />
       </div>
     );
   } else {
     return (
-      <div className={`container-default component ${styles}`}>
-        <div data-class-change className={containerStyles}>
-          This container does not contain a datasource item.
-        </div>
+      <div className={`container-default component`}>
+        <div data-class-change>This container does not contain a datasource item.</div>
       </div>
     );
   }
