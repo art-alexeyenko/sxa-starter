@@ -22,5 +22,5 @@
 .vercel
 
 # sitecore temp files
-.sitecore
+.sitecore/*
 !.sitecore/component-map.ts
