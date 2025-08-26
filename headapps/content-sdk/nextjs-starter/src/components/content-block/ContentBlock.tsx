@@ -1,6 +1,6 @@
-import { JSX } from 'react';
-import { Text, RichText, Field, withDatasourceCheck } from '@sitecore-jss/sitecore-jss-nextjs';
+import { Text, RichText, Field, withDatasourceCheck } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
+import { JSX } from 'react';
 
 type ContentBlockProps = ComponentProps & {
   fields: {
@@ -12,7 +12,7 @@ type ContentBlockProps = ComponentProps & {
 /**
  * A simple Content Block component, with a heading and rich text block.
  * This is the most basic building block of a content site, and the most basic
- * JSS component that's useful.
+ * Content SDK component that's useful.
  */
 const ContentBlock = ({ fields }: ContentBlockProps): JSX.Element => (
   <div className="contentBlock">
