@@ -1,6 +1,5 @@
 import { isDesignLibraryPreviewData } from '@sitecore-content-sdk/nextjs/editing';
 import { notFound } from 'next/navigation';
-import { draftMode } from 'next/headers'
 import { SiteInfo } from '@sitecore-content-sdk/nextjs';
 import sites from '.sitecore/sites.json';
 import client from 'src/lib/sitecore-client';
@@ -10,22 +9,22 @@ import Providers from 'src/Providers';
 import Bootstrap from 'src/Bootstrap';
 
 type PageProps = {
-  params: Promise<{ path?: string[]; [key: string]: string | string[] | undefined }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  params: Promise<{ path?: string[] }>;
 };
 
-export default async function Page({ params, searchParams }: PageProps) {
+export default async function Page({ params }: PageProps) {
   const { path } = await params;
-  const draft = await draftMode()
+
+  // Set preview to false until preview mode is integrated
+  const preview = { enabled: false, data: {} };
 
   // Fetch the page data from Sitecore
   let page;
-  if (draft.isEnabled) {
-    const editingParams = await searchParams;
-    if (isDesignLibraryPreviewData(editingParams)) {
-      page = await client.getDesignLibraryData(editingParams);
+  if (preview.enabled) {
+    if (isDesignLibraryPreviewData(preview.data)) {
+      page = await client.getDesignLibraryData(preview.data);
     } else {
-      page = await client.getPreview(editingParams);
+      page = await client.getPreview(preview.data);
     }
   } else {
     page = await client.getPage(path ?? [], { locale: 'en' });

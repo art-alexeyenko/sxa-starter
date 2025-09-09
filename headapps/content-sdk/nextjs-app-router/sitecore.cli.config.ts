@@ -23,4 +23,8 @@ export default defineCliConfig({
       }),
     ],
   },
+  componentMap: {
+    paths: ['src/components'],
+    exclude: ['src/components/content-sdk/*'],
+  },
 });
