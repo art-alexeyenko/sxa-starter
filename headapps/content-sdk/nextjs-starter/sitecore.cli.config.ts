@@ -4,7 +4,6 @@ import {
   generateSites,
   generateMetadata,
   extractFiles,
-  writeImportMap,
 } from '@sitecore-content-sdk/nextjs/tools';
 
 export default defineCliConfig({
@@ -15,10 +14,6 @@ export default defineCliConfig({
         scConfig,
       }),
       extractFiles({
-        scConfig,
-      }),
-      writeImportMap({
-        paths: ['src/components'],
         scConfig,
       }),
     ],

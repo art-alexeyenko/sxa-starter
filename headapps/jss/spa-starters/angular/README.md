@@ -40,7 +40,7 @@ Execute the following commands:
 ```shell
 npm install
 npm run build
-npm run start:connected
+npm run dev
 ```
 
 > The following features are not supported in development mode:
