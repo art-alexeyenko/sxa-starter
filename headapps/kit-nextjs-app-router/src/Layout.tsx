@@ -1,9 +1,8 @@
 import React, { JSX } from 'react';
-import { Field, Page } from '@sitecore-content-sdk/nextjs';
+import { AppPlaceholder, Field, Page } from '@sitecore-content-sdk/nextjs';
 import Scripts from 'src/Scripts';
 import SitecoreStyles from 'components/content-sdk/SitecoreStyles';
 import { DesignLibraryLayout } from './DesignLibraryLayout';
-import AppPlaceholder from 'components/content-sdk/Placeholder';
 import componentMap from '.sitecore/component-map';
 
 interface LayoutProps {
@@ -19,7 +18,6 @@ const Layout = ({ page }: LayoutProps): JSX.Element => {
   const { layout, mode } = page;
   const { route } = layout.sitecore;
   const mainClassPageEditing = mode.isEditing ? 'editing-mode' : 'prod-mode';
-
   return (
     <>
       <Scripts />
