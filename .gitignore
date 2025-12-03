@@ -11,6 +11,9 @@
 *.itempackage
 *.sicpackage
 
+# Lock files - should not be committed
+package-lock.json
+
 #Ignore thumbnails created by Windows
 Thumbs.db
 #Ignore files built by Visual Studio
@@ -42,3 +45,9 @@ _ReSharper*/
 .vs/
 #Nuget packages folder
 packages/
+
+#Ignore system files
+.DS_Store
+
+# VS Code settings
+.vscode/
